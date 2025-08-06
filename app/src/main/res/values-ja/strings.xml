@@ -1,0 +1,220 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MonthlyToDo</string>
+    
+    <!-- Navigation -->
+    <string name="calendar">カレンダー</string>
+    <string name="tasks">タスク</string>
+    <string name="statistics">統計</string>
+    <string name="achievements">実績</string>
+    <string name="settings">設定</string>
+    
+    <!-- Calendar -->
+    <string name="today">今日</string>
+    <string name="previous_month">前月</string>
+    <string name="next_month">翌月</string>
+    <string name="month_view">月表示</string>
+    <string name="week_view">週表示</string>
+    <string name="task_density">タスク密度</string>
+    <string name="low_density">低</string>
+    <string name="medium_density">中</string>
+    <string name="high_density">高</string>
+    
+    <!-- Task Management -->
+    <string name="add_task">タスク追加</string>
+    <string name="edit_task">タスク編集</string>
+    <string name="delete_task">タスク削除</string>
+    <string name="task_title">タイトル</string>
+    <string name="task_description">説明</string>
+    <string name="task_priority">優先度</string>
+    <string name="task_category">カテゴリ</string>
+    <string name="task_due_date">期限日</string>
+    <string name="task_due_time">期限時刻</string>
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    <string name="delete">削除</string>
+    <string name="edit">編集</string>
+    <string name="complete">完了</string>
+    <string name="incomplete">未完了</string>
+    <string name="all_day">終日</string>
+    
+    <!-- Priority -->
+    <string name="priority_high">高</string>
+    <string name="priority_medium">中</string>
+    <string name="priority_low">低</string>
+    
+    <!-- Categories -->
+    <string name="category_general">一般</string>
+    <string name="category_work">仕事</string>
+    <string name="category_personal">個人</string>
+    <string name="category_health">健康</string>
+    <string name="category_education">教育</string>
+    <string name="category_study">勉強</string>
+    <string name="category_shopping">買い物</string>
+    <string name="category_other">その他</string>
+    
+    <!-- Task List -->
+    <string name="my_tasks">マイタスク</string>
+    <string name="filter_tasks">タスクフィルター</string>
+    <string name="search_tasks">タスク検索</string>
+    <string name="no_tasks">この日にタスクはありません</string>
+    <string name="no_tasks_yet">タスクがありません</string>
+    <string name="add_first_task">最初のタスクを追加して開始</string>
+    <string name="completed_tasks">完了済みタスク</string>
+    <string name="pending_tasks">未完了タスク</string>
+    <string name="drag_to_reorder">ドラッグして並び替え</string>
+    <string name="mark_complete">完了にする</string>
+    <string name="completed">完了済み</string>
+    
+    <!-- Filter Dialog -->
+    <string name="filter_title">タスクフィルター</string>
+    <string name="date_range">日付範囲</string>
+    <string name="start_date">開始日</string>
+    <string name="end_date">終了日</string>
+    <string name="priority">優先度</string>
+    <string name="category">カテゴリ</string>
+    <string name="show_completed_tasks">完了済みタスクを表示</string>
+    <string name="clear_all">すべてクリア</string>
+    <string name="apply">適用</string>
+    <string name="select_start_date">開始日を選択</string>
+    <string name="select_end_date">終了日を選択</string>
+    
+    <!-- Rich Text Editor -->
+    <string name="rich_text_editor">リッチテキストエディター</string>
+    <string name="edit_description">説明を編集</string>
+    <string name="full_text">リッチテキスト</string>
+    <string name="word_count">文字数：%d</string>
+    <string name="clear">クリア</string>
+    <string name="description">説明</string>
+    <string name="click_to_add_description">リッチテキスト説明を追加（画像、書式などをサポート）</string>
+    
+    <!-- Statistics -->
+    <string name="completion_rate">完了率</string>
+    <string name="task_categories">タスクカテゴリ</string>
+    <string name="monthly_view">月次</string>
+    <string name="yearly_view">年次</string>
+    <string name="no_data_available">データがありません</string>
+    
+    <!-- Achievements -->
+    <string name="achievement_task_master">タスクマスター</string>
+    <string name="achievement_task_master_desc">今月10個のタスクを完了</string>
+    <string name="achievement_consistency_king">継続王</string>
+    <string name="achievement_consistency_king_desc">7日連続でタスクを完了</string>
+    <string name="achievement_high_achiever">高達成者</string>
+    <string name="achievement_high_achiever_desc">高優先度タスクを5個完了</string>
+    <string name="achievement_productive_month">生産的な月</string>
+    <string name="achievement_productive_month_desc">1ヶ月で20個のタスクを作成</string>
+    <string name="achievement_perfectionist">完璧主義者</string>
+    <string name="achievement_perfectionist_desc">80%の完了率を達成</string>
+    <string name="achievement_early_starter">早起き鳥</string>
+    <string name="achievement_early_starter_desc">今月15個のタスクを完了</string>
+    <string name="share">共有</string>
+    <string name="locked">🔒 ロック済み</string>
+    <string name="recent_milestones">最近のマイルストーン</string>
+    
+    <!-- Settings -->
+    <string name="appearance_settings">外観設定</string>
+    <string name="theme_settings">テーマ設定</string>
+    <string name="theme_settings_desc">好きな色のテーマを選択します</string>
+    <string name="language_settings">言語設定</string>
+    <string name="display_mode">表示モード</string>
+    <string name="light_mode">ライトモード</string>
+    <string name="dark_mode">ダークモード</string>
+    <string name="follow_system">システムに従う</string>
+    <string name="theme_color">テーマカラー</string>
+    <string name="blue_theme">ブルー</string>
+    <string name="green_theme">グリーン</string>
+    <string name="purple_theme">パープル</string>
+    <string name="orange_theme">オレンジ</string>
+    <string name="pink_theme">ピンク</string>
+    
+    <!-- Language -->
+    <string name="language">言語</string>
+    <string name="english">English</string>
+    <string name="chinese_simplified">简体中文</string>
+    <string name="chinese_traditional">繁體中文</string>
+    <string name="japanese">日本語</string>
+    <string name="indonesian">Bahasa Indonesia</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="confirm">確認</string>
+    <string name="back">戻る</string>
+    <string name="next">次へ</string>
+    <string name="previous">前へ</string>
+    <string name="done">完了</string>
+    <string name="close">閉じる</string>
+    
+    <!-- Months -->
+    <string name="january">1月</string>
+    <string name="february">2月</string>
+    <string name="march">3月</string>
+    <string name="april">4月</string>
+    <string name="may">5月</string>
+    <string name="june">6月</string>
+    <string name="july">7月</string>
+    <string name="august">8月</string>
+    <string name="september">9月</string>
+    <string name="october">10月</string>
+    <string name="november">11月</string>
+    <string name="december">12月</string>
+    
+    <!-- Month Abbreviations -->
+    <string name="jan">1月</string>
+    <string name="feb">2月</string>
+    <string name="mar">3月</string>
+    <string name="apr">4月</string>
+    <string name="may_short">5月</string>
+    <string name="jun">6月</string>
+    <string name="jul">7月</string>
+    <string name="aug">8月</string>
+    <string name="sep">9月</string>
+    <string name="oct">10月</string>
+    <string name="nov">11月</string>
+    <string name="dec">12月</string>
+    
+    <!-- Days of Week -->
+    <string name="sunday">日曜日</string>
+    <string name="monday">月曜日</string>
+    <string name="tuesday">火曜日</string>
+    <string name="wednesday">水曜日</string>
+    <string name="thursday">木曜日</string>
+    <string name="friday">金曜日</string>
+    <string name="saturday">土曜日</string>
+    
+    <!-- Day Abbreviations -->
+    <string name="sun">日</string>
+    <string name="mon">月</string>
+    <string name="tue">火</string>
+    <string name="wed">水</string>
+    <string name="thu">木</string>
+    <string name="fri">金</string>
+    <string name="sat">土</string>
+
+    <!-- Language Settings -->
+    <string name="language_change_info">言語の変更は即座に反映されます</string>
+
+    <!-- Settings Dialog -->
+    <string name="rate_app_title">月次ToDoを評価</string>
+    <string name="rate_app_message">このアプリはいかがですか？ストアで評価をお願いします。</string>
+    <string name="rate_now">今すぐ評価</string>
+    <string name="later">後で</string>
+
+    <!-- Achievements -->
+    <string name="share_all">すべて共有</string>
+
+    <!-- Milestones -->
+    <string name="milestone_tasks_completed">30個のタスク完了</string>
+    <string name="milestone_june_2023">2023年6月に</string>
+    <string name="milestone_2_days_ago">2日前</string>
+    <string name="milestone_hours_focused">100時間集中</string>
+    <string name="milestone_across_tasks">全タスクにわたって</string>
+    <string name="milestone_1_week_ago">1週間前</string>
+    <string name="about_us">About Us</string>
+    <string name="version">Version:</string>
+    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
+    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
+    <string name="about_us_ok">OK!</string>
+</resources>

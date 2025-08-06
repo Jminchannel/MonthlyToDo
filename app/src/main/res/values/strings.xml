@@ -1,0 +1,220 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MonthlyToDo</string>
+
+    <!-- Navigation -->
+    <string name="calendar">Calendar</string>
+    <string name="tasks">Tasks</string>
+    <string name="statistics">Statistics</string>
+    <string name="achievements">Achieve</string>
+    <string name="settings">Settings</string>
+
+    <!-- Calendar -->
+    <string name="today">Today</string>
+    <string name="previous_month">Previous month</string>
+    <string name="next_month">Next month</string>
+    <string name="month_view">Month</string>
+    <string name="week_view">Week</string>
+    <string name="task_density">Task Density</string>
+    <string name="low_density">Low</string>
+    <string name="medium_density">Medium</string>
+    <string name="high_density">High</string>
+
+    <!-- Task Management -->
+    <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="delete_task">Delete Task</string>
+    <string name="task_title">Title</string>
+    <string name="task_description">Description</string>
+    <string name="task_priority">Priority</string>
+    <string name="task_category">Category</string>
+    <string name="task_due_date">Due Date</string>
+    <string name="task_due_time">Due Time</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="complete">Complete</string>
+    <string name="incomplete">Incomplete</string>
+    <string name="all_day">All day</string>
+
+    <!-- Priority -->
+    <string name="priority_high">High</string>
+    <string name="priority_medium">Medium</string>
+    <string name="priority_low">Low</string>
+
+    <!-- Categories -->
+    <string name="category_general">General</string>
+    <string name="category_work">Work</string>
+    <string name="category_personal">Personal</string>
+    <string name="category_health">Health</string>
+    <string name="category_education">Education</string>
+    <string name="category_study">Study</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_other">Other</string>
+
+    <!-- Task List -->
+    <string name="my_tasks">My Tasks</string>
+    <string name="filter_tasks">Filter Tasks</string>
+    <string name="search_tasks">Search Tasks</string>
+    <string name="no_tasks">No tasks for this date</string>
+    <string name="no_tasks_yet">No tasks yet</string>
+    <string name="add_first_task">Add your first task to get started</string>
+    <string name="completed_tasks">Completed Tasks</string>
+    <string name="pending_tasks">Pending Tasks</string>
+    <string name="drag_to_reorder">Drag to reorder</string>
+    <string name="mark_complete">Mark complete</string>
+    <string name="completed">Completed</string>
+
+    <!-- Filter Dialog -->
+    <string name="filter_title">Filter Tasks</string>
+    <string name="date_range">Date Range</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="priority">Priority</string>
+    <string name="category">Category</string>
+    <string name="show_completed_tasks">Show Completed Tasks</string>
+    <string name="clear_all">Clear All</string>
+    <string name="apply">Apply</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="select_end_date">Select end date</string>
+
+    <!-- Rich Text Editor -->
+    <string name="rich_text_editor">Rich Text Editor</string>
+    <string name="edit_description">Edit Description</string>
+    <string name="full_text">Rich Text</string>
+    <string name="word_count">Word count: %d</string>
+    <string name="clear">Clear</string>
+    <string name="description">Description</string>
+    <string name="click_to_add_description">Click to add rich text description (supports images, formatting, etc.)</string>
+
+    <!-- Statistics -->
+    <string name="completion_rate">Completion Rate</string>
+    <string name="task_categories">Task Categories</string>
+    <string name="monthly_view">Monthly</string>
+    <string name="yearly_view">Yearly</string>
+    <string name="no_data_available">No data available</string>
+
+    <!-- Achievements -->
+    <string name="achievement_task_master">Task Master</string>
+    <string name="achievement_task_master_desc">Complete 10 tasks this month</string>
+    <string name="achievement_consistency_king">Consistency King</string>
+    <string name="achievement_consistency_king_desc">Complete tasks for 7 consecutive days</string>
+    <string name="achievement_high_achiever">High Achiever</string>
+    <string name="achievement_high_achiever_desc">Complete 5 high priority tasks</string>
+    <string name="achievement_productive_month">Productive Month</string>
+    <string name="achievement_productive_month_desc">Create 20 tasks in one month</string>
+    <string name="achievement_perfectionist">Perfectionist</string>
+    <string name="achievement_perfectionist_desc">Achieve 80% completion rate</string>
+    <string name="achievement_early_starter">Early Starter</string>
+    <string name="achievement_early_starter_desc">Complete 15 tasks this month</string>
+    <string name="share">Share</string>
+    <string name="locked">🔒 Locked</string>
+    <string name="recent_milestones">Recent Milestones</string>
+
+    <!-- Settings -->
+    <string name="appearance_settings">Appearance Settings</string>
+    <string name="theme_settings">Theme Settings</string>
+    <string name="theme_settings_desc">Choose your favorite color theme</string>
+    <string name="language_settings">Language Settings</string>
+    <string name="display_mode">Display Mode</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="follow_system">Follow System</string>
+    <string name="theme_color">Theme Color</string>
+    <string name="blue_theme">Blue</string>
+    <string name="green_theme">Green</string>
+    <string name="purple_theme">Purple</string>
+    <string name="orange_theme">Orange</string>
+    <string name="pink_theme">Pink</string>
+
+    <!-- Language -->
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="chinese_simplified">简体中文</string>
+    <string name="chinese_traditional">繁體中文</string>
+    <string name="japanese">日本語</string>
+    <string name="indonesian">Bahasa Indonesia</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="confirm">Confirm</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
+
+    <!-- Months -->
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="may">May</string>
+    <string name="june">June</string>
+    <string name="july">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+    <!-- Month Abbreviations -->
+    <string name="jan">Jan</string>
+    <string name="feb">Feb</string>
+    <string name="mar">Mar</string>
+    <string name="apr">Apr</string>
+    <string name="may_short">May</string>
+    <string name="jun">Jun</string>
+    <string name="jul">Jul</string>
+    <string name="aug">Aug</string>
+    <string name="sep">Sep</string>
+    <string name="oct">Oct</string>
+    <string name="nov">Nov</string>
+    <string name="dec">Dec</string>
+
+    <!-- Days of Week -->
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+
+    <!-- Day Abbreviations -->
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+
+    <!-- Language Settings -->
+    <string name="language_change_info">Language changes will take effect immediately</string>
+
+    <!-- Settings Dialog -->
+    <string name="rate_app_title">Rate MonthlyToDo</string>
+    <string name="rate_app_message">How much do you like this app? Please rate us on the store.</string>
+    <string name="rate_now">Rate Now</string>
+    <string name="later">Later</string>
+
+    <!-- Achievements -->
+    <string name="share_all">Share All</string>
+
+    <!-- Milestones -->
+    <string name="milestone_tasks_completed">30 Tasks Completed</string>
+    <string name="milestone_june_2023">In June 2023</string>
+    <string name="milestone_2_days_ago">2 days ago</string>
+    <string name="milestone_hours_focused">100 Hours Focused</string>
+    <string name="milestone_across_tasks">Across all tasks</string>
+    <string name="milestone_1_week_ago">1 week ago</string>
+    <string name="about_us">About Us</string>
+    <string name="version">Version:</string>
+    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
+    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
+    <string name="about_us_ok">OK!</string>
+</resources>

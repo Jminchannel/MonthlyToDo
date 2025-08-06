@@ -1,0 +1,220 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MonthlyToDo</string>
+    
+    <!-- Navigation -->
+    <string name="calendar">日历</string>
+    <string name="tasks">任务</string>
+    <string name="statistics">统计</string>
+    <string name="achievements">成就</string>
+    <string name="settings">设置</string>
+    
+    <!-- Calendar -->
+    <string name="today">今天</string>
+    <string name="previous_month">上个月</string>
+    <string name="next_month">下个月</string>
+    <string name="month_view">月视图</string>
+    <string name="week_view">周视图</string>
+    <string name="task_density">任务密度</string>
+    <string name="low_density">低</string>
+    <string name="medium_density">中</string>
+    <string name="high_density">高</string>
+    
+    <!-- Task Management -->
+    <string name="add_task">添加任务</string>
+    <string name="edit_task">编辑任务</string>
+    <string name="delete_task">删除任务</string>
+    <string name="task_title">标题</string>
+    <string name="task_description">描述</string>
+    <string name="task_priority">优先级</string>
+    <string name="task_category">分类</string>
+    <string name="task_due_date">截止日期</string>
+    <string name="task_due_time">截止时间</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="complete">完成</string>
+    <string name="incomplete">未完成</string>
+    <string name="all_day">全天</string>
+    
+    <!-- Priority -->
+    <string name="priority_high">高</string>
+    <string name="priority_medium">中</string>
+    <string name="priority_low">低</string>
+    
+    <!-- Categories -->
+    <string name="category_general">常规</string>
+    <string name="category_work">工作</string>
+    <string name="category_personal">个人</string>
+    <string name="category_health">健康</string>
+    <string name="category_education">教育</string>
+    <string name="category_study">学习</string>
+    <string name="category_shopping">购物</string>
+    <string name="category_other">其他</string>
+    
+    <!-- Task List -->
+    <string name="my_tasks">我的任务</string>
+    <string name="filter_tasks">筛选任务</string>
+    <string name="search_tasks">搜索任务</string>
+    <string name="no_tasks">此日期没有任务</string>
+    <string name="no_tasks_yet">暂无任务</string>
+    <string name="add_first_task">添加您的第一个任务开始使用</string>
+    <string name="completed_tasks">已完成任务</string>
+    <string name="pending_tasks">待完成任务</string>
+    <string name="drag_to_reorder">拖拽重新排序</string>
+    <string name="mark_complete">标记完成</string>
+    <string name="completed">已完成</string>
+    
+    <!-- Filter Dialog -->
+    <string name="filter_title">筛选任务</string>
+    <string name="date_range">日期范围</string>
+    <string name="start_date">开始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="priority">优先级</string>
+    <string name="category">分类</string>
+    <string name="show_completed_tasks">显示已完成任务</string>
+    <string name="clear_all">清除全部</string>
+    <string name="apply">应用</string>
+    <string name="select_start_date">选择开始日期</string>
+    <string name="select_end_date">选择结束日期</string>
+    
+    <!-- Rich Text Editor -->
+    <string name="rich_text_editor">富文本编辑器</string>
+    <string name="edit_description">编辑描述</string>
+    <string name="full_text">富文本</string>
+    <string name="word_count">字数：%d</string>
+    <string name="clear">清空</string>
+    <string name="description">描述</string>
+    <string name="click_to_add_description">点击添加富文本描述（支持图片、格式等）</string>
+    
+    <!-- Statistics -->
+    <string name="completion_rate">完成率</string>
+    <string name="task_categories">任务分类</string>
+    <string name="monthly_view">月度</string>
+    <string name="yearly_view">年度</string>
+    <string name="no_data_available">暂无数据</string>
+    
+    <!-- Achievements -->
+    <string name="achievement_task_master">任务大师</string>
+    <string name="achievement_task_master_desc">本月完成10个任务</string>
+    <string name="achievement_consistency_king">坚持之王</string>
+    <string name="achievement_consistency_king_desc">连续7天完成任务</string>
+    <string name="achievement_high_achiever">高成就者</string>
+    <string name="achievement_high_achiever_desc">完成5个高优先级任务</string>
+    <string name="achievement_productive_month">高效月份</string>
+    <string name="achievement_productive_month_desc">一个月内创建20个任务</string>
+    <string name="achievement_perfectionist">完美主义者</string>
+    <string name="achievement_perfectionist_desc">达到80%完成率</string>
+    <string name="achievement_early_starter">早起鸟</string>
+    <string name="achievement_early_starter_desc">本月完成15个任务</string>
+    <string name="share">分享</string>
+    <string name="locked">🔒 已锁定</string>
+    <string name="recent_milestones">最近里程碑</string>
+    
+    <!-- Settings -->
+    <string name="appearance_settings">外观设置</string>
+    <string name="theme_settings">主题设置</string>
+    <string name="theme_settings_desc">选择您喜欢的颜色主题</string>
+    <string name="language_settings">语言设置</string>
+    <string name="display_mode">显示模式</string>
+    <string name="light_mode">浅色模式</string>
+    <string name="dark_mode">深色模式</string>
+    <string name="follow_system">跟随系统</string>
+    <string name="theme_color">主题颜色</string>
+    <string name="blue_theme">蓝色</string>
+    <string name="green_theme">绿色</string>
+    <string name="purple_theme">紫色</string>
+    <string name="orange_theme">橙色</string>
+    <string name="pink_theme">粉色</string>
+    
+    <!-- Language -->
+    <string name="language">语言</string>
+    <string name="english">English</string>
+    <string name="chinese_simplified">简体中文</string>
+    <string name="chinese_traditional">繁體中文</string>
+    <string name="japanese">日本語</string>
+    <string name="indonesian">Bahasa Indonesia</string>
+    
+    <!-- Common -->
+    <string name="ok">确定</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="confirm">确认</string>
+    <string name="back">返回</string>
+    <string name="next">下一步</string>
+    <string name="previous">上一步</string>
+    <string name="done">完成</string>
+    <string name="close">关闭</string>
+    
+    <!-- Months -->
+    <string name="january">一月</string>
+    <string name="february">二月</string>
+    <string name="march">三月</string>
+    <string name="april">四月</string>
+    <string name="may">五月</string>
+    <string name="june">六月</string>
+    <string name="july">七月</string>
+    <string name="august">八月</string>
+    <string name="september">九月</string>
+    <string name="october">十月</string>
+    <string name="november">十一月</string>
+    <string name="december">十二月</string>
+    
+    <!-- Month Abbreviations -->
+    <string name="jan">1月</string>
+    <string name="feb">2月</string>
+    <string name="mar">3月</string>
+    <string name="apr">4月</string>
+    <string name="may_short">5月</string>
+    <string name="jun">6月</string>
+    <string name="jul">7月</string>
+    <string name="aug">8月</string>
+    <string name="sep">9月</string>
+    <string name="oct">10月</string>
+    <string name="nov">11月</string>
+    <string name="dec">12月</string>
+    
+    <!-- Days of Week -->
+    <string name="sunday">星期日</string>
+    <string name="monday">星期一</string>
+    <string name="tuesday">星期二</string>
+    <string name="wednesday">星期三</string>
+    <string name="thursday">星期四</string>
+    <string name="friday">星期五</string>
+    <string name="saturday">星期六</string>
+    
+    <!-- Day Abbreviations -->
+    <string name="sun">日</string>
+    <string name="mon">一</string>
+    <string name="tue">二</string>
+    <string name="wed">三</string>
+    <string name="thu">四</string>
+    <string name="fri">五</string>
+    <string name="sat">六</string>
+
+    <!-- Language Settings -->
+    <string name="language_change_info">语言更改将立即生效</string>
+
+    <!-- Settings Dialog -->
+    <string name="rate_app_title">为应用评分</string>
+    <string name="rate_app_message">您喜欢这个应用吗？请在应用商店为我们评分。</string>
+    <string name="rate_now">立即评分</string>
+    <string name="later">稍后</string>
+
+    <!-- Achievements -->
+    <string name="share_all">全部分享</string>
+
+    <!-- Milestones -->
+    <string name="milestone_tasks_completed">完成30个任务</string>
+    <string name="milestone_june_2023">在2023年6月</string>
+    <string name="milestone_2_days_ago">2天前</string>
+    <string name="milestone_hours_focused">专注100小时</string>
+    <string name="milestone_across_tasks">跨所有任务</string>
+    <string name="milestone_1_week_ago">1周前</string>
+    <string name="about_us">About Us</string>
+    <string name="version">Version:</string>
+    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
+    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
+    <string name="about_us_ok">OK!</string>
+</resources>

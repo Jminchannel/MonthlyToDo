@@ -1,0 +1,220 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">MonthlyToDo</string>
+    
+    <!-- Navigation -->
+    <string name="calendar">Kalender</string>
+    <string name="tasks">Tugas</string>
+    <string name="statistics">Statistik</string>
+    <string name="achievements">Pencapaian</string>
+    <string name="settings">Pengaturan</string>
+    
+    <!-- Calendar -->
+    <string name="today">Hari Ini</string>
+    <string name="previous_month">Bulan Sebelumnya</string>
+    <string name="next_month">Bulan Berikutnya</string>
+    <string name="month_view">Tampilan Bulan</string>
+    <string name="week_view">Tampilan Minggu</string>
+    <string name="task_density">Kepadatan Tugas</string>
+    <string name="low_density">Rendah</string>
+    <string name="medium_density">Sedang</string>
+    <string name="high_density">Tinggi</string>
+    
+    <!-- Task Management -->
+    <string name="add_task">Tambah Tugas</string>
+    <string name="edit_task">Edit Tugas</string>
+    <string name="delete_task">Hapus Tugas</string>
+    <string name="task_title">Judul</string>
+    <string name="task_description">Deskripsi</string>
+    <string name="task_priority">Prioritas</string>
+    <string name="task_category">Kategori</string>
+    <string name="task_due_date">Tanggal Jatuh Tempo</string>
+    <string name="task_due_time">Waktu Jatuh Tempo</string>
+    <string name="save">Simpan</string>
+    <string name="cancel">Batal</string>
+    <string name="delete">Hapus</string>
+    <string name="edit">Edit</string>
+    <string name="complete">Selesai</string>
+    <string name="incomplete">Belum Selesai</string>
+    <string name="all_day">Sepanjang Hari</string>
+    
+    <!-- Priority -->
+    <string name="priority_high">Tinggi</string>
+    <string name="priority_medium">Sedang</string>
+    <string name="priority_low">Rendah</string>
+    
+    <!-- Categories -->
+    <string name="category_general">Umum</string>
+    <string name="category_work">Kerja</string>
+    <string name="category_personal">Pribadi</string>
+    <string name="category_health">Kesehatan</string>
+    <string name="category_education">Pendidikan</string>
+    <string name="category_study">Belajar</string>
+    <string name="category_shopping">Belanja</string>
+    <string name="category_other">Lainnya</string>
+    
+    <!-- Task List -->
+    <string name="my_tasks">Tugas Saya</string>
+    <string name="filter_tasks">Filter Tugas</string>
+    <string name="search_tasks">Cari Tugas</string>
+    <string name="no_tasks">Tidak ada tugas untuk tanggal ini</string>
+    <string name="no_tasks_yet">Belum ada tugas</string>
+    <string name="add_first_task">Tambahkan tugas pertama Anda untuk memulai</string>
+    <string name="completed_tasks">Tugas Selesai</string>
+    <string name="pending_tasks">Tugas Tertunda</string>
+    <string name="drag_to_reorder">Seret untuk mengurutkan ulang</string>
+    <string name="mark_complete">Tandai selesai</string>
+    <string name="completed">Selesai</string>
+    
+    <!-- Filter Dialog -->
+    <string name="filter_title">Filter Tugas</string>
+    <string name="date_range">Rentang Tanggal</string>
+    <string name="start_date">Tanggal Mulai</string>
+    <string name="end_date">Tanggal Akhir</string>
+    <string name="priority">Prioritas</string>
+    <string name="category">Kategori</string>
+    <string name="show_completed_tasks">Tampilkan Tugas Selesai</string>
+    <string name="clear_all">Hapus Semua</string>
+    <string name="apply">Terapkan</string>
+    <string name="select_start_date">Pilih tanggal mulai</string>
+    <string name="select_end_date">Pilih tanggal akhir</string>
+    
+    <!-- Rich Text Editor -->
+    <string name="rich_text_editor">Editor Teks Kaya</string>
+    <string name="edit_description">Edit Deskripsi</string>
+    <string name="full_text">Teks Kaya</string>
+    <string name="word_count">Jumlah kata: %d</string>
+    <string name="clear">Hapus</string>
+    <string name="description">Deskripsi</string>
+    <string name="click_to_add_description">Klik untuk menambah deskripsi teks kaya (mendukung gambar, format, dll.)</string>
+    
+    <!-- Statistics -->
+    <string name="completion_rate">Tingkat Penyelesaian</string>
+    <string name="task_categories">Kategori Tugas</string>
+    <string name="monthly_view">Bulanan</string>
+    <string name="yearly_view">Tahunan</string>
+    <string name="no_data_available">Tidak ada data tersedia</string>
+    
+    <!-- Achievements -->
+    <string name="achievement_task_master">Master Tugas</string>
+    <string name="achievement_task_master_desc">Selesaikan 10 tugas bulan ini</string>
+    <string name="achievement_consistency_king">Raja Konsistensi</string>
+    <string name="achievement_consistency_king_desc">Selesaikan tugas selama 7 hari berturut-turut</string>
+    <string name="achievement_high_achiever">Pencapai Tinggi</string>
+    <string name="achievement_high_achiever_desc">Selesaikan 5 tugas prioritas tinggi</string>
+    <string name="achievement_productive_month">Bulan Produktif</string>
+    <string name="achievement_productive_month_desc">Buat 20 tugas dalam satu bulan</string>
+    <string name="achievement_perfectionist">Perfeksionis</string>
+    <string name="achievement_perfectionist_desc">Capai tingkat penyelesaian 80%</string>
+    <string name="achievement_early_starter">Pemulai Awal</string>
+    <string name="achievement_early_starter_desc">Selesaikan 15 tugas bulan ini</string>
+    <string name="share">Bagikan</string>
+    <string name="locked">🔒 Terkunci</string>
+    <string name="recent_milestones">Pencapaian Terbaru</string>
+    
+    <!-- Settings -->
+    <string name="appearance_settings">Pengaturan Tampilan</string>
+    <string name="theme_settings">Pengaturan Tema</string>
+    <string name="theme_settings_desc">Pilih tema warna yang Anda sukai</string>
+    <string name="language_settings">Pengaturan Bahasa</string>
+    <string name="display_mode">Mode Tampilan</string>
+    <string name="light_mode">Mode Terang</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="follow_system">Ikuti Sistem</string>
+    <string name="theme_color">Warna Tema</string>
+    <string name="blue_theme">Biru</string>
+    <string name="green_theme">Hijau</string>
+    <string name="purple_theme">Ungu</string>
+    <string name="orange_theme">Oranye</string>
+    <string name="pink_theme">Merah Muda</string>
+    
+    <!-- Language -->
+    <string name="language">Bahasa</string>
+    <string name="english">English</string>
+    <string name="chinese_simplified">简体中文</string>
+    <string name="chinese_traditional">繁體中文</string>
+    <string name="japanese">日本語</string>
+    <string name="indonesian">Bahasa Indonesia</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="back">Kembali</string>
+    <string name="next">Berikutnya</string>
+    <string name="previous">Sebelumnya</string>
+    <string name="done">Selesai</string>
+    <string name="close">Tutup</string>
+    
+    <!-- Months -->
+    <string name="january">Januari</string>
+    <string name="february">Februari</string>
+    <string name="march">Maret</string>
+    <string name="april">April</string>
+    <string name="may">Mei</string>
+    <string name="june">Juni</string>
+    <string name="july">Juli</string>
+    <string name="august">Agustus</string>
+    <string name="september">September</string>
+    <string name="october">Oktober</string>
+    <string name="november">November</string>
+    <string name="december">Desember</string>
+    
+    <!-- Month Abbreviations -->
+    <string name="jan">Jan</string>
+    <string name="feb">Feb</string>
+    <string name="mar">Mar</string>
+    <string name="apr">Apr</string>
+    <string name="may_short">Mei</string>
+    <string name="jun">Jun</string>
+    <string name="jul">Jul</string>
+    <string name="aug">Agu</string>
+    <string name="sep">Sep</string>
+    <string name="oct">Okt</string>
+    <string name="nov">Nov</string>
+    <string name="dec">Des</string>
+    
+    <!-- Days of Week -->
+    <string name="sunday">Minggu</string>
+    <string name="monday">Senin</string>
+    <string name="tuesday">Selasa</string>
+    <string name="wednesday">Rabu</string>
+    <string name="thursday">Kamis</string>
+    <string name="friday">Jumat</string>
+    <string name="saturday">Sabtu</string>
+    
+    <!-- Day Abbreviations -->
+    <string name="sun">Min</string>
+    <string name="mon">Sen</string>
+    <string name="tue">Sel</string>
+    <string name="wed">Rab</string>
+    <string name="thu">Kam</string>
+    <string name="fri">Jum</string>
+    <string name="sat">Sab</string>
+
+    <!-- Language Settings -->
+    <string name="language_change_info">Perubahan bahasa akan berlaku segera</string>
+
+    <!-- Settings Dialog -->
+    <string name="rate_app_title">Beri Rating ToDo Bulanan</string>
+    <string name="rate_app_message">Bagaimana pendapat Anda tentang aplikasi ini? Silakan beri rating di toko aplikasi.</string>
+    <string name="rate_now">Beri Rating Sekarang</string>
+    <string name="later">Nanti</string>
+
+    <!-- Achievements -->
+    <string name="share_all">Bagikan Semua</string>
+
+    <!-- Milestones -->
+    <string name="milestone_tasks_completed">30 Tugas Selesai</string>
+    <string name="milestone_june_2023">Pada Juni 2023</string>
+    <string name="milestone_2_days_ago">2 hari yang lalu</string>
+    <string name="milestone_hours_focused">100 Jam Fokus</string>
+    <string name="milestone_across_tasks">Di semua tugas</string>
+    <string name="milestone_1_week_ago">1 minggu yang lalu</string>
+    <string name="about_us">About Us</string>
+    <string name="version">Version:</string>
+    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
+    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
+    <string name="about_us_ok">OK!</string>
+</resources>
