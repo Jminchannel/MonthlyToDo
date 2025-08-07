@@ -10,7 +10,7 @@ import com.jmin.monthlytodo.model.Task
 
 @Database(
     entities = [Task::class, Holiday::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(DateConverter::class)
@@ -28,7 +28,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "monthly_todo_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration() // 添加这行来强制重建数据库
+                .build()
                 INSTANCE = instance
                 instance
             }

@@ -9,9 +9,10 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -30,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.jmin.monthlytodo.R
-import kotlinx.coroutines.launch
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -41,33 +41,42 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationItem.Achievements,
         NavigationItem.Settings
     )
-    
+
     Surface(
         modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp),
         color = MaterialTheme.colorScheme.surface,
-        shadowElevation = 8.dp
+        tonalElevation = 0.dp,
+        shadowElevation = 0.dp,
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.1f))
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
+                .height(64.dp)
+                .padding(horizontal = 8.dp),
+            horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentRoute = navBackStackEntry?.destination?.route
-            
+
             items.forEach { item ->
-                CustomNavigationItem(
-                    item = item,
-                    isSelected = currentRoute == item.route,
-                    onClick = {
-                        navController.navigate(item.route) {
-                            popUpTo(navController.graph.startDestinationId)
-                            launchSingleTop = true
+                Box(
+                    modifier = Modifier.weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CustomNavigationItem(
+                        item = item,
+                        isSelected = currentRoute == item.route,
+                        onClick = {
+                            navController.navigate(item.route) {
+                                popUpTo(navController.graph.startDestinationId)
+                                launchSingleTop = true
+                            }
                         }
-                    }
-                )
+                    )
+                }
             }
         }
     }
@@ -79,73 +88,59 @@ fun CustomNavigationItem(
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
-    var isPressed by remember { mutableStateOf(false) }
-    
-    // 动画效果
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 1.2f else if (isSelected) 1.1f else 1f,
+        targetValue = if (isPressed) 0.9f else 1f,
         animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
+            dampingRatio = Spring.DampingRatioNoBouncy,
+            stiffness = Spring.StiffnessMedium
         ),
         label = "scale"
     )
-    
+
     val iconScale by animateFloatAsState(
-        targetValue = if (isSelected) 1.2f else 1f,
-        animationSpec = tween(300),
+        targetValue = if (isSelected) 1.1f else 1f,
+        animationSpec = spring(stiffness = Spring.StiffnessLow),
         label = "iconScale"
     )
-    
+
     Column(
         modifier = Modifier
-            .clip(RoundedCornerShape(16.dp))
+            .scale(scale)
             .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null, // 移除ripple效果，使用我们自定义的缩放动画
-                onClick = {
-                    isPressed = true
-                    onClick()
-                    // 重置按压状态
-                    kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.Main).launch {
-                        kotlinx.coroutines.delay(150)
-                        isPressed = false
-                    }
-                }
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
             )
-            .background(
-                color = if (isSelected) {
-                    MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
-                } else Color.Transparent,
-                shape = RoundedCornerShape(16.dp)
-            )
-            .padding(horizontal = 12.dp, vertical = 8.dp)
-            .scale(scale),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(vertical = 8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Icon(
             imageVector = item.icon,
             contentDescription = stringResource(item.title),
-            modifier = Modifier.scale(iconScale),
+            modifier = Modifier
+                .size(24.dp)
+                .scale(iconScale),
             tint = if (isSelected) {
                 MaterialTheme.colorScheme.primary
             } else {
                 MaterialTheme.colorScheme.onSurfaceVariant
             }
         )
-        
-        // 只有选中的项目显示文字，带动画效果
+
         AnimatedVisibility(
             visible = isSelected,
-            enter = fadeIn(animationSpec = tween(300)) + scaleIn(
+            enter = fadeIn(animationSpec = tween(200)) + scaleIn(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessMedium
-                )
+                    stiffness = Spring.StiffnessLow
+                ),
+                initialScale = 0.9f
             ),
-            exit = fadeOut(animationSpec = tween(200)) + scaleOut(
-                animationSpec = tween(200)
-            )
+            exit = fadeOut(animationSpec = tween(150)) + scaleOut(animationSpec = tween(150), targetScale = 0.9f)
         ) {
             Text(
                 text = stringResource(item.title),

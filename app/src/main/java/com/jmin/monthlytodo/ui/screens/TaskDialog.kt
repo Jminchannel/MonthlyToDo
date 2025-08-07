@@ -33,6 +33,10 @@ import com.jmin.monthlytodo.ui.theme.PriorityLow
 import com.jmin.monthlytodo.ui.theme.PriorityMedium
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.rememberDatePickerState
+import androidx.compose.material3.rememberTimePickerState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -45,7 +49,6 @@ fun TaskDialog(
     onTaskReorder: (List<Task>) -> Unit,
     onTaskAdd: (Task) -> Unit  // 添加新任务的回调
 ) {
-    var taskList by remember { mutableStateOf(tasks) }
     val dateFormat = SimpleDateFormat("MMMM d, yyyy", Locale.getDefault())
     val haptic = LocalHapticFeedback.current
     val generalCategory = stringResource(R.string.category_general)
@@ -59,15 +62,11 @@ fun TaskDialog(
     // Reorderable状态
     val lazyListState = rememberLazyListState()
     val reorderableLazyListState = rememberReorderableLazyListState(lazyListState) { from, to ->
-        taskList = taskList.toMutableList().apply {
+        val reorderedTasks = tasks.toMutableList().apply {
             add(to.index, removeAt(from.index))
         }
-
-        // 更新order字段并保存到数据库
-        val updatedTasks = taskList.mapIndexed { index, task -> task.copy(order = index) }
-        taskList = updatedTasks
-        onTaskReorder(updatedTasks)
-
+        // 更新order字段并通知ViewModel
+        onTaskReorder(reorderedTasks.mapIndexed { index, task -> task.copy(order = index) })
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
     }
     
@@ -75,7 +74,8 @@ fun TaskDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(16.dp)
+                .heightIn(min = 200.dp, max = 500.dp),
             shape = RoundedCornerShape(16.dp)
         ) {
             Column(
@@ -106,9 +106,9 @@ fun TaskDialog(
                 Spacer(modifier = Modifier.height(8.dp))
                 
                 // Task count
-                if (taskList.isNotEmpty()) {
+                if (tasks.isNotEmpty()) {
                     Text(
-                        text = "${taskList.size} tasks",
+                        text = "${tasks.size} tasks",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -127,30 +127,17 @@ fun TaskDialog(
                     state = lazyListState,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .weight(1f)
                 ) {
                     items(
-                        items = taskList,
-                        key = { task ->
-                            if (task.id == 0L) {
-                                // 对于新创建但尚未分配ID的任务，使用标题作为key
-                                "new_${task.title}_${task.hashCode()}"
-                            } else {
-                                // 对于已有ID的任务，直接使用ID
-                                task.id
-                            }
-                        }
+                        items = tasks,
+                        key = { it.id }
                     ) { task ->
                         ReorderableItem(reorderableLazyListState, key = task.id) { isDragging ->
                             ReorderableTaskItem(
                                 task = task,
                                 isDragging = isDragging,
                                 onTaskUpdate = onTaskUpdate,
-                                onTaskDelete = {
-                                    // 删除任务
-                                    onTaskDelete(it)
-                                    taskList = taskList.filter { t -> t.id != it.id }
-                                },
+                                onTaskDelete = onTaskDelete, // 直接传递ViewModel的删除函数
                                 reorderableScope = this
                             )
                         }
@@ -196,8 +183,6 @@ fun TaskDialog(
             onDismiss = { showAddTaskDialog = false },
             onAddTask = { task ->
                 onTaskAdd(task)
-                // 添加任务后刷新任务列表
-                taskList = taskList + listOf(task)
                 showAddTaskDialog = false
             }
         )
@@ -276,15 +261,6 @@ fun ReorderableTaskItem(
                 )
             }
             
-            // Checkbox
-            Checkbox(
-                checked = isCompleted,
-                onCheckedChange = { checked ->
-                    isCompleted = checked
-                    onTaskUpdate(task.copy(isCompleted = checked))
-                }
-            )
-            
             // Priority indicator
             Box(
                 modifier = Modifier
@@ -297,7 +273,17 @@ fun ReorderableTaskItem(
                             Priority.LOW -> PriorityLow
                         }
                     )
-                    .padding(end = 8.dp)
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            // Checkbox
+            Checkbox(
+                checked = isCompleted,
+                onCheckedChange = { checked ->
+                    isCompleted = checked
+                    onTaskUpdate(task.copy(isCompleted = checked))
+                }
             )
             
             // Task content
@@ -361,6 +347,7 @@ fun ReorderableTaskItem(
         )
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddTaskDialog(
     date: Date,
@@ -373,9 +360,115 @@ fun AddTaskDialog(
     var priority by remember { mutableStateOf(Priority.MEDIUM) }
     var category by remember { mutableStateOf(generalCategory) }
     var selectedTime by remember { mutableStateOf(Calendar.getInstance().apply { time = date }.time) }
-    
+    var showDatePicker by remember { mutableStateOf(false) }
+    var showTimePicker by remember { mutableStateOf(false) }
+    var showRichTextEditor by remember { mutableStateOf(false) }
+
     val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
     val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
+
+    // 日期选择器
+    if (showDatePicker) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = selectedTime.time
+        )
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            val newDate = Date(millis)
+                            val calendar = Calendar.getInstance()
+                            calendar.time = selectedTime
+                            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                            val minute = calendar.get(Calendar.MINUTE)
+
+                            calendar.time = newDate
+                            calendar.set(Calendar.HOUR_OF_DAY, hour)
+                            calendar.set(Calendar.MINUTE, minute)
+                            selectedTime = calendar.time
+                        }
+                        showDatePicker = false
+                    }
+                ) {
+                    Text(stringResource(R.string.ok))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDatePicker = false
+                    }
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+
+    // 时间选择器
+    if (showTimePicker) {
+        val calendar = Calendar.getInstance()
+        calendar.time = selectedTime
+        val initialHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val initialMinute = calendar.get(Calendar.MINUTE)
+
+        val timePickerState = rememberTimePickerState(
+            initialHour = initialHour,
+            initialMinute = initialMinute,
+            is24Hour = true
+        )
+
+        Dialog(onDismissRequest = { showTimePicker = false }) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.select_time),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    TimePicker(
+                        state = timePickerState
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        TextButton(onClick = { showTimePicker = false }) {
+                            Text(stringResource(R.string.cancel))
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Button(
+                            onClick = {
+                                val calendar = Calendar.getInstance()
+                                calendar.time = selectedTime
+                                calendar.set(Calendar.HOUR_OF_DAY, timePickerState.hour)
+                                calendar.set(Calendar.MINUTE, timePickerState.minute)
+                                selectedTime = calendar.time
+                                showTimePicker = false
+                            }
+                        ) {
+                            Text(stringResource(R.string.ok))
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     Dialog(onDismissRequest = onDismiss) {
         Card(
@@ -423,7 +516,6 @@ fun AddTaskDialog(
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 // Description input with rich text editor
-                var showRichTextEditor by remember { mutableStateOf(false) }
                 
                 Column {
                     Text(
@@ -518,9 +610,7 @@ fun AddTaskDialog(
                 ) {
                     // Date picker
                     Button(
-                        onClick = {
-                            // Date picker logic would go here
-                        },
+                        onClick = { showDatePicker = true },
                         modifier = Modifier.weight(1f),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -540,9 +630,7 @@ fun AddTaskDialog(
                     
                     // Time picker
                     Button(
-                        onClick = {
-                            // Time picker logic would go here
-                        },
+                        onClick = { showTimePicker = true },
                         modifier = Modifier.weight(1f),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -681,9 +769,125 @@ fun EditTaskDialog(
     var category by remember { mutableStateOf(task.category) }
     var selectedTime by remember { mutableStateOf(task.dueDate) }
     var showRichTextEditor by remember { mutableStateOf(false) }
+    var showDatePicker by remember { mutableStateOf(false) }
+    var showTimePicker by remember { mutableStateOf(false) }
 
     val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
     val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
+    
+    // 日期选择器
+    if (showDatePicker) {
+        val datePickerState = rememberDatePickerState(
+            initialSelectedDateMillis = selectedTime.time
+        )
+        
+        DatePickerDialog(
+            onDismissRequest = { showDatePicker = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            val newDate = Date(millis)
+                            // 保留原有时间部分
+                            val calendar = Calendar.getInstance()
+                            calendar.time = selectedTime
+                            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+                            val minute = calendar.get(Calendar.MINUTE)
+                            
+                            calendar.time = newDate
+                            calendar.set(Calendar.HOUR_OF_DAY, hour)
+                            calendar.set(Calendar.MINUTE, minute)
+                            selectedTime = calendar.time
+                        }
+                        showDatePicker = false
+                    }
+                ) {
+                    Text(stringResource(R.string.ok))
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showDatePicker = false
+                    }
+                ) {
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        ) {
+            DatePicker(state = datePickerState)
+        }
+    }
+    
+    // 时间选择器
+    if (showTimePicker) {
+        // 使用Material3 TimePicker
+        val calendar = Calendar.getInstance()
+        calendar.time = selectedTime
+        val initialHour = calendar.get(Calendar.HOUR_OF_DAY)
+        val initialMinute = calendar.get(Calendar.MINUTE)
+        
+        val timePickerState = rememberTimePickerState(
+            initialHour = initialHour,
+            initialMinute = initialMinute,
+            is24Hour = true
+        )
+        
+        Dialog(onDismissRequest = { showTimePicker = false }) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    // Header
+                    Text(
+                        text = stringResource(R.string.select_time),
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Bold
+                    )
+                    
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    TimePicker(
+                        state = timePickerState
+                    )
+                    
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    // Buttons
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        TextButton(onClick = { showTimePicker = false }) {
+                            Text(stringResource(R.string.cancel))
+                        }
+                        
+                        Spacer(modifier = Modifier.width(8.dp))
+                        
+                        Button(
+                            onClick = {
+                                val calendar = Calendar.getInstance()
+                                calendar.time = selectedTime
+                                calendar.set(Calendar.HOUR_OF_DAY, timePickerState.hour)
+                                calendar.set(Calendar.MINUTE, timePickerState.minute)
+                                selectedTime = calendar.time
+                                showTimePicker = false
+                            }
+                        ) {
+                            Text(stringResource(R.string.ok))
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     if (showRichTextEditor) {
         RichTextEditorDialog(
@@ -829,22 +1033,48 @@ fun EditTaskDialog(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Date and time
+                    // Date and time selection
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = dateFormat.format(selectedTime),
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.weight(1f)
-                        )
-
-                        Text(
-                            text = timeFormat.format(selectedTime),
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
+                        // Date picker button
+                        Button(
+                            onClick = { showDatePicker = true },
+                            modifier = Modifier.weight(1f),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(dateFormat.format(selectedTime))
+                        }
+                        
+                        Spacer(modifier = Modifier.width(8.dp))
+                        
+                        // Time picker button
+                        Button(
+                            onClick = { showTimePicker = true },
+                            modifier = Modifier.weight(1f),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.AccessTime,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(timeFormat.format(selectedTime))
+                        }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))

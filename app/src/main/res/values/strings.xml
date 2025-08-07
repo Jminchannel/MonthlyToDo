@@ -15,6 +15,8 @@
     <string name="next_month">Next month</string>
     <string name="month_view">Month</string>
     <string name="week_view">Week</string>
+    <string name="transitioning_to_week">Transitioning to Week View...</string>
+    <string name="transitioning_to_month">Transitioning to Month View...</string>
     <string name="task_density">Task Density</string>
     <string name="low_density">Low</string>
     <string name="medium_density">Medium</string>
@@ -146,6 +148,7 @@
     <string name="previous">Previous</string>
     <string name="done">Done</string>
     <string name="close">Close</string>
+    <string name="select_time">Select Time</string>
 
     <!-- Months -->
     <string name="january">January</string>

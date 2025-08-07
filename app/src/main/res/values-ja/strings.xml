@@ -214,6 +214,7 @@
     <string name="milestone_1_week_ago">1週間前</string>
     <string name="about_us">About Us</string>
     <string name="version">Version:</string>
+    <string name="select_time">選択時間</string>
     <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
     <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
     <string name="about_us_ok">OK!</string>

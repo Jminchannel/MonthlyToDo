@@ -1,5 +1,6 @@
 package com.jmin.monthlytodo.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmin.monthlytodo.model.Task
@@ -23,19 +24,34 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
     val currentDate: StateFlow<Date> = _currentDate
     
     init {
+        Log.d("TaskViewModel", "Initializing TaskViewModel")
         loadTasks()
         loadHolidays()
     }
     
     fun loadTasks() {
         viewModelScope.launch {
-            _tasks.value = repository.getAllTasks()
+            try {
+                Log.d("TaskViewModel", "Loading tasks...")
+                val taskList = repository.getAllTasks()
+                Log.d("TaskViewModel", "Loaded ${taskList.size} tasks")
+                _tasks.value = taskList
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error loading tasks", e)
+            }
         }
     }
     
     fun loadHolidays() {
         viewModelScope.launch {
-            _holidays.value = repository.getAllHolidays()
+            try {
+                Log.d("TaskViewModel", "Loading holidays...")
+                val holidayList = repository.getAllHolidays()
+                Log.d("TaskViewModel", "Loaded ${holidayList.size} holidays")
+                _holidays.value = holidayList
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error loading holidays", e)
+            }
         }
     }
     
@@ -47,45 +63,106 @@ class TaskViewModel(private val repository: TaskRepository) : ViewModel() {
     
     fun addTask(task: Task) {
         viewModelScope.launch {
-            repository.insertTask(task)
-            loadTasks()
+            try {
+                Log.d("TaskViewModel", "Adding task: ${task.title}")
+                val newTaskId = repository.insertTask(task)
+                Log.d("TaskViewModel", "Task added with ID: $newTaskId")
+                
+                // 立即在本地添加任务
+                val newTask = task.copy(id = newTaskId)
+                val currentTasks = _tasks.value.toMutableList()
+                currentTasks.add(newTask)
+                _tasks.value = currentTasks.toList()
+                
+                Log.d("TaskViewModel", "Local task list updated, now has ${_tasks.value.size} tasks")
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error adding task", e)
+            }
         }
     }
     
     fun updateTask(task: Task) {
         viewModelScope.launch {
-            repository.updateTask(task)
-            loadTasks()
+            try {
+                Log.d("TaskViewModel", "Updating task: ${task.title}")
+                // 首先在本地更新列表，以即时反映UI变化
+                val currentTasks = _tasks.value.toMutableList()
+                val index = currentTasks.indexOfFirst { it.id == task.id }
+                if (index != -1) {
+                    currentTasks[index] = task
+                    _tasks.value = currentTasks.toList()
+                    Log.d("TaskViewModel", "Local task updated")
+                }
+                // 然后在后台更新数据库
+                repository.updateTask(task)
+                Log.d("TaskViewModel", "Database task updated")
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error updating task", e)
+                // 如果数据库更新失败，重新加载以保持一致性
+                loadTasks()
+            }
         }
     }
-    
+
     fun deleteTask(task: Task) {
         viewModelScope.launch {
-            repository.deleteTask(task)
-            loadTasks()
+            try {
+                Log.d("TaskViewModel", "Deleting task: ${task.title}")
+                // 首先在本地删除
+                val currentTasks = _tasks.value.toMutableList()
+                currentTasks.removeAll { it.id == task.id }
+                _tasks.value = currentTasks.toList()
+                Log.d("TaskViewModel", "Local task deleted")
+                
+                // 然后从数据库删除
+                repository.deleteTask(task)
+                Log.d("TaskViewModel", "Database task deleted")
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error deleting task", e)
+                // 如果数据库删除失败，重新加载以保持一致性
+                loadTasks()
+            }
         }
     }
     
     fun updateTaskOrder(tasks: List<Task>) {
         viewModelScope.launch {
-            tasks.forEachIndexed { index, task ->
-                repository.updateTask(task.copy(order = index))
+            try {
+                Log.d("TaskViewModel", "Updating task order for ${tasks.size} tasks")
+                tasks.forEachIndexed { index, task ->
+                    repository.updateTask(task.copy(order = index))
+                }
+                // 立即更新本地状态
+                _tasks.value = tasks
+                Log.d("TaskViewModel", "Task order updated")
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error updating task order", e)
+                loadTasks()
             }
-            loadTasks()
         }
     }
     
     fun addHoliday(holiday: Holiday) {
         viewModelScope.launch {
-            repository.insertHoliday(holiday)
-            loadHolidays()
+            try {
+                Log.d("TaskViewModel", "Adding holiday")
+                repository.insertHoliday(holiday)
+                loadHolidays()
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error adding holiday", e)
+            }
         }
     }
     
     fun deleteHoliday(holiday: Holiday) {
         viewModelScope.launch {
-            repository.deleteHoliday(holiday)
-            loadHolidays()
+            try {
+                Log.d("TaskViewModel", "Deleting holiday")
+                repository.deleteHoliday(holiday)
+                loadHolidays()
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error deleting holiday", e)
+            }
         }
     }
     
