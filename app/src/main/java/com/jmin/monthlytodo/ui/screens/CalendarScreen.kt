@@ -1,7 +1,16 @@
 package com.jmin.monthlytodo.ui.screens
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.with
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -70,6 +79,7 @@ enum class CalendarView {
     MONTH, WEEK
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CalendarScreen(viewModel: TaskViewModel) {
     var view by remember { mutableStateOf(CalendarView.MONTH) }
@@ -139,107 +149,122 @@ fun CalendarScreen(viewModel: TaskViewModel) {
             WeekHeaders()
         }
 
-        // 根据视图类型构建日历内容
-        when (view) {
-            CalendarView.MONTH -> {
-                // 月视图：构建日历数据
-                val calendar = Calendar.getInstance()
-                calendar.time = currentDate
-                calendar.set(Calendar.DAY_OF_MONTH, 1)
-                val firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-                calendar.add(Calendar.DAY_OF_MONTH, -(firstDayOfWeek - 1))
-
-                val days = mutableListOf<Date>()
-                repeat(42) {
-                    days.add(calendar.time)
-                    calendar.add(Calendar.DAY_OF_MONTH, 1)
+        // 使用AnimatedContent包装日历内容，但内容本身仍然是LazyColumn的items
+        item {
+            AnimatedContent(
+                targetState = view,
+                transitionSpec = {
+                    if (targetState == CalendarView.WEEK) {
+                        // Month to Week: shrink and fade out, slide in from bottom
+                        slideInVertically(animationSpec = tween(durationMillis = 300)) { height -> height } + fadeIn(animationSpec = tween(durationMillis = 300)) with
+                                slideOutVertically(animationSpec = tween(durationMillis = 300)) { height -> -height } + fadeOut(animationSpec = tween(durationMillis = 300))
+                    } else {
+                        // Week to Month: expand and fade in, slide out to bottom
+                        slideInVertically(animationSpec = tween(durationMillis = 300)) { height -> -height } + fadeIn(animationSpec = tween(durationMillis = 300)) with
+                                slideOutVertically(animationSpec = tween(durationMillis = 300)) { height -> height } + fadeOut(animationSpec = tween(durationMillis = 300))
+                    }
                 }
+            ) { targetView ->
+                Column {
+                    when (targetView) {
+                        CalendarView.MONTH -> {
+                            // 月视图：构建日历数据
+                            val calendar = Calendar.getInstance()
+                            calendar.time = currentDate
+                            calendar.set(Calendar.DAY_OF_MONTH, 1)
+                            val firstDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+                            calendar.add(Calendar.DAY_OF_MONTH, -(firstDayOfWeek - 1))
 
-                // 每一行作为独立的item
-                for (week in 0 until 6) {
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp),
-                            horizontalArrangement = Arrangement.spacedBy(2.dp)
-                        ) {
-                            for (day in 0 until 7) {
-                                val dayIndex = week * 7 + day
-                                val date = days[dayIndex]
-                                val tasksForDay = tasks.filter { isSameDay(it.dueDate, date) }
-                                val totalTasks = tasksForDay.size
-                                val completedTasks = tasksForDay.count { it.isCompleted }
-                                val isCurrentMonth = date.month == currentDate.month
-                                val isToday = isSameDay(date, Date())
-                                val isPast = isPastDate(date)
-                                val isHoliday = holidays.any { isSameDay(it.date, date) }
-                                
-                                Box(modifier = Modifier.weight(1f)) {
-                                    CalendarDay(
-                                        date = date,
-                                        isCurrentMonth = isCurrentMonth,
-                                        isToday = isToday,
-                                        isPast = isPast,
-                                        totalTasks = totalTasks,
-                                        completedTasks = completedTasks,
-                                        isHoliday = isHoliday,
-                                        tasks = tasksForDay,
-                                        onClick = { 
-                                            selectedDate = date
-                                            showTaskDialog = true
+                            val days = mutableListOf<Date>()
+                            repeat(42) {
+                                days.add(calendar.time)
+                                calendar.add(Calendar.DAY_OF_MONTH, 1)
+                            }
+
+                            // 每一行
+                            for (week in 0 until 6) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 4.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                                ) {
+                                    for (day in 0 until 7) {
+                                        val dayIndex = week * 7 + day
+                                        val date = days[dayIndex]
+                                        val tasksForDay = tasks.filter { isSameDay(it.dueDate, date) }
+                                        val totalTasks = tasksForDay.size
+                                        val completedTasks = tasksForDay.count { it.isCompleted }
+                                        val isCurrentMonth = date.month == currentDate.month
+                                        val isToday = isSameDay(date, Date())
+                                        val isPast = isPastDate(date)
+                                        val isHoliday = holidays.any { isSameDay(it.date, date) }
+                                        
+                                        Box(modifier = Modifier.weight(1f)) {
+                                            CalendarDay(
+                                                date = date,
+                                                isCurrentMonth = isCurrentMonth,
+                                                isToday = isToday,
+                                                isPast = isPast,
+                                                totalTasks = totalTasks,
+                                                completedTasks = completedTasks,
+                                                isHoliday = isHoliday,
+                                                tasks = tasksForDay,
+                                                onClick = { 
+                                                    selectedDate = date
+                                                    showTaskDialog = true
+                                                }
+                                            )
                                         }
-                                    )
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-            }
-            CalendarView.WEEK -> {
-                // 周视图：构建周数据
-                val calendar = Calendar.getInstance()
-                calendar.time = currentDate
-                val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
-                calendar.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - 1))
+                        CalendarView.WEEK -> {
+                            // 周视图：构建周数据
+                            val calendar = Calendar.getInstance()
+                            calendar.time = currentDate
+                            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+                            calendar.add(Calendar.DAY_OF_MONTH, -(dayOfWeek - 1))
 
-                val days = mutableListOf<Date>()
-                repeat(7) {
-                    days.add(calendar.time)
-                    calendar.add(Calendar.DAY_OF_MONTH, 1)
-                }
+                            val days = mutableListOf<Date>()
+                            repeat(7) {
+                                days.add(calendar.time)
+                                calendar.add(Calendar.DAY_OF_MONTH, 1)
+                            }
 
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp),
-                        horizontalArrangement = Arrangement.spacedBy(2.dp)
-                    ) {
-                        days.forEach { date ->
-                            val tasksForDay = tasks.filter { isSameDay(it.dueDate, date) }
-                            val totalTasks = tasksForDay.size
-                            val completedTasks = tasksForDay.count { it.isCompleted }
-                            val isCurrentMonth = true
-                            val isToday = isSameDay(date, Date())
-                            val isPast = isPastDate(date)
-                            val isHoliday = holidays.any { isSameDay(it.date, date) }
-                            
-                            Box(modifier = Modifier.weight(1f)) {
-                                CalendarDay(
-                                    date = date,
-                                    isCurrentMonth = isCurrentMonth,
-                                    isToday = isToday,
-                                    isPast = isPast,
-                                    totalTasks = totalTasks,
-                                    completedTasks = completedTasks,
-                                    isHoliday = isHoliday,
-                                    tasks = tasksForDay,
-                                    onClick = { 
-                                        selectedDate = date
-                                        showTaskDialog = true
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 4.dp),
+                                horizontalArrangement = Arrangement.spacedBy(2.dp)
+                            ) {
+                                days.forEach { date ->
+                                    val tasksForDay = tasks.filter { isSameDay(it.dueDate, date) }
+                                    val totalTasks = tasksForDay.size
+                                    val completedTasks = tasksForDay.count { it.isCompleted }
+                                    val isCurrentMonth = true
+                                    val isToday = isSameDay(date, Date())
+                                    val isPast = isPastDate(date)
+                                    val isHoliday = holidays.any { isSameDay(it.date, date) }
+                                    
+                                    Box(modifier = Modifier.weight(1f)) {
+                                        CalendarDay(
+                                            date = date,
+                                            isCurrentMonth = isCurrentMonth,
+                                            isToday = isToday,
+                                            isPast = isPast,
+                                            totalTasks = totalTasks,
+                                            completedTasks = completedTasks,
+                                            isHoliday = isHoliday,
+                                            tasks = tasksForDay,
+                                            onClick = { 
+                                                selectedDate = date
+                                                showTaskDialog = true
+                                            }
+                                        )
                                     }
-                                )
+                                }
                             }
                         }
                     }
@@ -507,18 +532,7 @@ fun CalendarDay(
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 tasks.forEach { task -> // 显示所有任务
-                    Text(
-                        text = task.title,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = if (task.isCompleted) {
-                            MaterialTheme.colorScheme.onSurface
-                        } else {
-                            MaterialTheme.colorScheme.onSurface
-                        },
-                        fontSize = 8.sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Center,
+                    Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(
@@ -530,7 +544,30 @@ fun CalendarDay(
                                 shape = RoundedCornerShape(4.dp)
                             )
                             .padding(horizontal = 4.dp, vertical = 2.dp)
-                    )
+                    ) {
+                        // 使用Box来实现字符限制和半遮蔽效果
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clipToBounds(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = if (task.title.length > 4) {
+                                    task.title.take(5) // 最多取5个字符
+                                } else {
+                                    task.title
+                                },
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                fontSize = 8.sp,
+                                maxLines = 1,
+                                overflow = TextOverflow.Clip, // 使用Clip而不是Ellipsis，让第5个字可以半显示
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    }
                 }
             }
         }
