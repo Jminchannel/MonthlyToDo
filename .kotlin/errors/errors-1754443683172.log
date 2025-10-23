@@ -1,5 +1,5 @@
 kotlin version: 2.0.21
-error message: org.jetbrains.kotlin.util.FileAnalysisException: While analysing D:/MyApps/MonthlyToDo/app/src/main/java/com/jmin/monthlytodo/MainActivity.kt:41:5: java.lang.IllegalArgumentException: source must not be null
+error message: org.jetbrains.kotlin.util.FileAnalysisException: While analysing D:/MyApps/MonthlyQuestJournal/app/src/main/java/com/jmin/MonthlyQuestJournal/MainActivity.kt:41:5: java.lang.IllegalArgumentException: source must not be null
 	at org.jetbrains.kotlin.util.AnalysisExceptionsKt.wrapIntoFileAnalysisExceptionIfNeeded(AnalysisExceptions.kt:57)
 	at org.jetbrains.kotlin.fir.FirCliExceptionHandler.handleExceptionOnFileAnalysis(Utils.kt:249)
 	at org.jetbrains.kotlin.fir.pipeline.AnalyseKt.runCheckers(analyse.kt:46)

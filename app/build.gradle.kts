@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.jmin.monthlytodo"
+    namespace = "xjj.derrew.xzgn"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.jmin.monthlytodo"
+        applicationId = "xjj.derrew.xzgn"
         minSdk = 24
         targetSdk = 36
-        versionCode = 5
-        versionName = "1.0.4"
+        versionCode = 1
+        versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -61,8 +61,6 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     // 添加DataStore用于偏好设置
     implementation(libs.androidx.datastore.preferences)
-    // 添加图表库
-    implementation(libs.compose.m3)
     // 添加拖拽排序库
     implementation(libs.reorderable)
 

@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">MonthlyToDo</string>
+    <string name="app_name">Monthly Quest Journal</string>
     
     <!-- Navigation -->
     <string name="calendar">カレンダー</string>
@@ -19,6 +19,8 @@
     <string name="low_density">低</string>
     <string name="medium_density">中</string>
     <string name="high_density">高</string>
+    <string name="monthly_tasks">今月のタスク</string>
+    <string name="no_tasks_this_month">今月のタスクはありません</string>
     
     <!-- Task Management -->
     <string name="add_task">タスク追加</string>
@@ -197,7 +199,10 @@
     <string name="language_change_info">言語の変更は即座に反映されます</string>
 
     <!-- Settings Dialog -->
-    <string name="rate_app_title">月次ToDoを評価</string>
+    <string name="about_section">概要</string>
+    <string name="about_app_title">Monthly Quest Journalについて</string>
+    <string name="rate_app_item_title">アプリを評価</string>
+    <string name="rate_app_title">Monthly Quest Journalを評価</string>
     <string name="rate_app_message">このアプリはいかがですか？ストアで評価をお願いします。</string>
     <string name="rate_now">今すぐ評価</string>
     <string name="later">後で</string>
@@ -212,10 +217,25 @@
     <string name="milestone_hours_focused">100時間集中</string>
     <string name="milestone_across_tasks">全タスクにわたって</string>
     <string name="milestone_1_week_ago">1週間前</string>
-    <string name="about_us">About Us</string>
-    <string name="version">Version:</string>
     <string name="select_time">選択時間</string>
-    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
-    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
-    <string name="about_us_ok">OK!</string>
+    
+    <!-- About -->
+    <string name="about_us">概要</string>
+    <string name="version">バージョン：</string>
+    <string name="about_text_1">シンプルで直感的なToDoアプリケーションで、毎月のタスクを効率的に管理できます。</string>
+    <string name="about_text_2">Jetpack Composeで ❤️ を込めて開発</string>
+    <string name="about_us_ok">OK</string>
+    
+    <!-- Enhanced About Dialog -->
+    <string name="about_description">Monthly Quest Journalは、タスク管理と月次目標達成のための完璧なパートナーです。整理整頓、進捗追跡、成果の祝福をサポートします。</string>
+    <string name="about_features_title">主な機能</string>
+    <string name="about_feature_1">優先度とカテゴリによる直感的なタスク管理</string>
+    <string name="about_feature_2">月表示・週表示対応の美しいカレンダービュー</string>
+    <string name="about_feature_3">詳細な統計と進捗トラッキング</string>
+    <string name="about_feature_4">モチベーションを維持する実績システム</string>
+    <string name="about_feature_5">複数のテーマとカスタマイズオプション</string>
+    <string name="about_feature_6">多言語サポート（5言語以上対応）</string>
+    <string name="about_developer_title">開発チーム</string>
+    <string name="about_developer_info">生産性とエレガントなデザインを信じる情熱的な開発者によって丁寧に作られています。お客様の体験を継続的に改善することに尽力しています。</string>
+    <string name="about_tech_stack">Jetpack Compose • Material Design 3 • Kotlin で構築</string>
 </resources>

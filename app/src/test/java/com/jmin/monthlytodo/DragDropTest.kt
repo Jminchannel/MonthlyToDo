@@ -1,7 +1,6 @@
-package com.jmin.monthlytodo
+package xjj.derrew.xzgn
 
-import com.jmin.monthlytodo.model.Priority
-import com.jmin.monthlytodo.model.Task
+import xjj.derrew.xzgn.model.Task
 import org.junit.Test
 import org.junit.Assert.*
 import java.util.*

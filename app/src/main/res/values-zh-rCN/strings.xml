@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">MonthlyToDo</string>
+    <string name="app_name">Monthly Quest Journal</string>
     
     <!-- Navigation -->
     <string name="calendar">日历</string>
@@ -21,6 +21,8 @@
     <string name="low_density">低</string>
     <string name="medium_density">中</string>
     <string name="high_density">高</string>
+    <string name="monthly_tasks">本月任务</string>
+    <string name="no_tasks_this_month">本月暂无任务</string>
     
     <!-- Task Management -->
     <string name="add_task">添加任务</string>
@@ -119,6 +121,11 @@
     <string name="theme_settings">主题设置</string>
     <string name="theme_settings_desc">选择您喜欢的颜色主题</string>
     <string name="language_settings">语言设置</string>
+    <string name="calendar_size_settings">日历大小</string>
+    <string name="calendar_size_settings_desc">调节日历显示大小</string>
+    <string name="task_settings">任务设置</string>
+    <string name="category_management">分类管理</string>
+    <string name="category_management_desc">管理您的任务分类</string>
     <string name="display_mode">显示模式</string>
     <string name="light_mode">浅色模式</string>
     <string name="dark_mode">深色模式</string>
@@ -200,6 +207,9 @@
     <string name="language_change_info">语言更改将立即生效</string>
 
     <!-- Settings Dialog -->
+    <string name="about_section">关于</string>
+    <string name="about_app_title">关于 Monthly Quest Journal</string>
+    <string name="rate_app_item_title">为应用评分</string>
     <string name="rate_app_title">为应用评分</string>
     <string name="rate_app_message">您喜欢这个应用吗？请在应用商店为我们评分。</string>
     <string name="rate_now">立即评分</string>
@@ -215,9 +225,56 @@
     <string name="milestone_hours_focused">专注100小时</string>
     <string name="milestone_across_tasks">跨所有任务</string>
     <string name="milestone_1_week_ago">1周前</string>
-    <string name="about_us">About Us</string>
-    <string name="version">Version:</string>
-    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
-    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
-    <string name="about_us_ok">OK!</string>
+    
+    <!-- Category Management -->
+    <string name="add_category">添加</string>
+    <string name="edit_category">编辑分类</string>
+    <string name="delete_category_title">删除分类</string>
+    <string name="delete_category_message">确定要删除分类「%1$s」吗？</string>
+    <string name="cannot_delete_category_title">无法删除分类</string>
+    <string name="cannot_delete_category_message">分类「%1$s」无法删除，因为当前有 %2$d 个任务正在使用该分类。请先重新分配或删除这些任务。</string>
+    <string name="category_name">分类名称</string>
+    <string name="category_name_empty">分类名称不能为空</string>
+    <string name="default_category">默认分类（不可编辑）</string>
+    <string name="add_new_category">添加新分类</string>
+    <string name="no_categories">暂无分类</string>
+    <string name="category_management_hint">默认分类不可删除或重命名。您可以添加自己的自定义分类。</string>
+    <string name="category_added_success">分类添加成功</string>
+    <string name="category_add_failed">分类添加失败</string>
+    <string name="category_renamed_success">分类重命名成功</string>
+    <string name="category_rename_failed">分类重命名失败</string>
+    <string name="category_deleted_success">分类删除成功</string>
+    <string name="category_delete_failed">分类删除失败</string>
+    <string name="add">添加</string>
+    
+    <!-- Calendar Size Settings -->
+    <string name="calendar_size_hint">调节日历显示大小以适应您的偏好和屏幕尺寸。</string>
+    <string name="calendar_size_small">小</string>
+    <string name="calendar_size_small_desc">紧凑视图，显示更多内容</string>
+    <string name="calendar_size_medium">中</string>
+    <string name="calendar_size_medium_desc">标准大小（推荐）</string>
+    <string name="calendar_size_large">大</string>
+    <string name="calendar_size_large_desc">更大的日历，阅读更清晰</string>
+    <string name="calendar_size_extra_large">特大</string>
+    <string name="calendar_size_extra_large_desc">最大尺寸，最佳可见性</string>
+    
+    <!-- About -->
+    <string name="about_us">关于我们</string>
+    <string name="version">版本：</string>
+    <string name="about_text_1">一个简单直观的待办事项应用，帮助您高效管理每月任务。</string>
+    <string name="about_text_2">使用 Jetpack Compose 用 ❤️ 开发</string>
+    <string name="about_us_ok">确定</string>
+    
+    <!-- Enhanced About Dialog -->
+    <string name="about_description">Monthly Quest Journal 是您管理任务和实现月度目标的完美伙伴。保持井然有序，追踪进度，庆祝成就。</string>
+    <string name="about_features_title">核心功能</string>
+    <string name="about_feature_1">直观的任务管理，支持优先级和分类</string>
+    <string name="about_feature_2">精美的日历视图，支持月视图和周视图</string>
+    <string name="about_feature_3">详细的统计数据和进度跟踪</string>
+    <string name="about_feature_4">成就系统让您保持动力</string>
+    <string name="about_feature_5">多种主题和自定义选项</string>
+    <string name="about_feature_6">多语言支持（支持5+种语言）</string>
+    <string name="about_developer_title">开发团队</string>
+    <string name="about_developer_info">由热爱生产力和优雅设计的专注开发者精心打造。我们致力于不断改进您的使用体验。</string>
+    <string name="about_tech_stack">基于 Jetpack Compose • Material Design 3 • Kotlin 构建</string>
 </resources>

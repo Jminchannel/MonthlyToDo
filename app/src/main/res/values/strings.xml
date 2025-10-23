@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">MonthlyToDo</string>
+    <string name="app_name">Monthly Quest Journal</string>
 
     <!-- Navigation -->
     <string name="calendar">Calendar</string>
@@ -21,6 +21,8 @@
     <string name="low_density">Low</string>
     <string name="medium_density">Medium</string>
     <string name="high_density">High</string>
+    <string name="monthly_tasks">Monthly Tasks</string>
+    <string name="no_tasks_this_month">No tasks for this month</string>
 
     <!-- Task Management -->
     <string name="add_task">Add Task</string>
@@ -119,6 +121,11 @@
     <string name="theme_settings">Theme Settings</string>
     <string name="theme_settings_desc">Choose your favorite color theme</string>
     <string name="language_settings">Language Settings</string>
+    <string name="calendar_size_settings">Calendar Size</string>
+    <string name="calendar_size_settings_desc">Adjust calendar display size</string>
+    <string name="task_settings">Task Settings</string>
+    <string name="category_management">Category Management</string>
+    <string name="category_management_desc">Manage your task categories</string>
     <string name="display_mode">Display Mode</string>
     <string name="light_mode">Light Mode</string>
     <string name="dark_mode">Dark Mode</string>
@@ -200,7 +207,10 @@
     <string name="language_change_info">Language changes will take effect immediately</string>
 
     <!-- Settings Dialog -->
-    <string name="rate_app_title">Rate MonthlyToDo</string>
+    <string name="about_section">About</string>
+    <string name="about_app_title">About Monthly Quest Journal</string>
+    <string name="rate_app_item_title">Rate this app</string>
+    <string name="rate_app_title">Rate Monthly Quest Journal</string>
     <string name="rate_app_message">How much do you like this app? Please rate us on the store.</string>
     <string name="rate_now">Rate Now</string>
     <string name="later">Later</string>
@@ -215,9 +225,56 @@
     <string name="milestone_hours_focused">100 Hours Focused</string>
     <string name="milestone_across_tasks">Across all tasks</string>
     <string name="milestone_1_week_ago">1 week ago</string>
+    
+    <!-- Category Management -->
+    <string name="add_category">Add</string>
+    <string name="edit_category">Edit Category</string>
+    <string name="delete_category_title">Delete Category</string>
+    <string name="delete_category_message">Are you sure you want to delete the category \"%1$s\"?</string>
+    <string name="cannot_delete_category_title">Cannot Delete Category</string>
+    <string name="cannot_delete_category_message">The category \"%1$s\" cannot be deleted because it is currently being used by %2$d task(s). Please reassign or delete these tasks first.</string>
+    <string name="category_name">Category Name</string>
+    <string name="category_name_empty">Category name cannot be empty</string>
+    <string name="default_category">Default category (cannot be edited)</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="no_categories">No categories yet</string>
+    <string name="category_management_hint">Default categories cannot be deleted or renamed. You can add your own custom categories.</string>
+    <string name="category_added_success">Category added successfully</string>
+    <string name="category_add_failed">Failed to add category</string>
+    <string name="category_renamed_success">Category renamed successfully</string>
+    <string name="category_rename_failed">Failed to rename category</string>
+    <string name="category_deleted_success">Category deleted successfully</string>
+    <string name="category_delete_failed">Failed to delete category</string>
+    <string name="add">Add</string>
+    
+    <!-- Calendar Size Settings -->
+    <string name="calendar_size_hint">Adjust the calendar display size to suit your preference and screen size.</string>
+    <string name="calendar_size_small">Small</string>
+    <string name="calendar_size_small_desc">Compact view, fits more content</string>
+    <string name="calendar_size_medium">Medium</string>
+    <string name="calendar_size_medium_desc">Standard size (Recommended)</string>
+    <string name="calendar_size_large">Large</string>
+    <string name="calendar_size_large_desc">Larger calendar for better readability</string>
+    <string name="calendar_size_extra_large">Extra Large</string>
+    <string name="calendar_size_extra_large_desc">Maximum size for optimal visibility</string>
+    
+    <!-- About -->
     <string name="about_us">About Us</string>
-    <string name="version">Version:</string>
+    <string name="version">Version: </string>
     <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
     <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
-    <string name="about_us_ok">OK!</string>
+    <string name="about_us_ok">OK</string>
+    
+    <!-- Enhanced About Dialog -->
+    <string name="about_description">Monthly Quest Journal is your perfect companion for managing tasks and achieving your monthly goals. Stay organized, track your progress, and celebrate your accomplishments.</string>
+    <string name="about_features_title">Key Features</string>
+    <string name="about_feature_1">Intuitive task management with priorities and categories</string>
+    <string name="about_feature_2">Beautiful calendar view with monthly/weekly modes</string>
+    <string name="about_feature_3">Detailed statistics and progress tracking</string>
+    <string name="about_feature_4">Achievement system to keep you motivated</string>
+    <string name="about_feature_5">Multiple themes and customization options</string>
+    <string name="about_feature_6">Multi-language support (5+ languages)</string>
+    <string name="about_developer_title">Development Team</string>
+    <string name="about_developer_info">Crafted with passion by dedicated developers who believe in productivity and elegant design. We\'re committed to continuously improving your experience.</string>
+    <string name="about_tech_stack">Built with Jetpack Compose • Material Design 3 • Kotlin</string>
 </resources>

@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">MonthlyToDo</string>
+    <string name="app_name">Monthly Quest Journal</string>
     
     <!-- Navigation -->
     <string name="calendar">Kalender</string>
@@ -19,6 +19,8 @@
     <string name="low_density">Rendah</string>
     <string name="medium_density">Sedang</string>
     <string name="high_density">Tinggi</string>
+    <string name="monthly_tasks">Tugas Bulan Ini</string>
+    <string name="no_tasks_this_month">Tidak ada tugas bulan ini</string>
     
     <!-- Task Management -->
     <string name="add_task">Tambah Tugas</string>
@@ -197,11 +199,15 @@
     <string name="language_change_info">Perubahan bahasa akan berlaku segera</string>
 
     <!-- Settings Dialog -->
-    <string name="rate_app_title">Beri Rating ToDo Bulanan</string>
+    <string name="about_section">Tentang</string>
+    <string name="about_app_title">Tentang Monthly Quest Journal</string>
+    <string name="rate_app_item_title">Beri rating aplikasi ini</string>
+    <string name="rate_app_title">Beri Rating Monthly Quest Journal</string>
     <string name="rate_app_message">Bagaimana pendapat Anda tentang aplikasi ini? Silakan beri rating di toko aplikasi.</string>
     <string name="rate_now">Beri Rating Sekarang</string>
     <string name="later">Nanti</string>
-    <string name="select_time">Pilih Waktu Pilih Waktu</string>
+    <string name="select_time">Pilih Waktu</string>
+    
     <!-- Achievements -->
     <string name="share_all">Bagikan Semua</string>
 
@@ -212,9 +218,24 @@
     <string name="milestone_hours_focused">100 Jam Fokus</string>
     <string name="milestone_across_tasks">Di semua tugas</string>
     <string name="milestone_1_week_ago">1 minggu yang lalu</string>
-    <string name="about_us">About Us</string>
-    <string name="version">Version:</string>
-    <string name="about_text_1">A simple and intuitive todo application to help you manage your monthly tasks efficiently.</string>
-    <string name="about_text_2">Developed with ❤️ using Jetpack Compose</string>
-    <string name="about_us_ok">OK!</string>
+    
+    <!-- About -->
+    <string name="about_us">Tentang Kami</string>
+    <string name="version">Versi: </string>
+    <string name="about_text_1">Aplikasi todo yang sederhana dan intuitif untuk membantu Anda mengelola tugas bulanan dengan efisien.</string>
+    <string name="about_text_2">Dikembangkan dengan ❤️ menggunakan Jetpack Compose</string>
+    <string name="about_us_ok">OK</string>
+    
+    <!-- Enhanced About Dialog -->
+    <string name="about_description">Monthly Quest Journal adalah teman sempurna Anda untuk mengelola tugas dan mencapai tujuan bulanan. Tetap terorganisir, lacak kemajuan, dan rayakan pencapaian Anda.</string>
+    <string name="about_features_title">Fitur Utama</string>
+    <string name="about_feature_1">Manajemen tugas intuitif dengan prioritas dan kategori</string>
+    <string name="about_feature_2">Tampilan kalender cantik dengan mode bulanan/mingguan</string>
+    <string name="about_feature_3">Statistik detail dan pelacakan kemajuan</string>
+    <string name="about_feature_4">Sistem pencapaian untuk menjaga motivasi Anda</string>
+    <string name="about_feature_5">Berbagai tema dan opsi kustomisasi</string>
+    <string name="about_feature_6">Dukungan multi-bahasa (5+ bahasa)</string>
+    <string name="about_developer_title">Tim Pengembang</string>
+    <string name="about_developer_info">Dibuat dengan penuh semangat oleh pengembang berdedikasi yang percaya pada produktivitas dan desain elegan. Kami berkomitmen untuk terus meningkatkan pengalaman Anda.</string>
+    <string name="about_tech_stack">Dibangun dengan Jetpack Compose • Material Design 3 • Kotlin</string>
 </resources>

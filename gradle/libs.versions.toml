@@ -1,8 +1,5 @@
 [versions]
 agp = "8.11.1"
-composeM3 = "2.0.1"
-composeM3Version = "2.0.1"
-datastorePreferences = "1.1.2"
 datastorePreferencesVersion = "1.1.2"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
@@ -12,10 +9,8 @@ espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
 composeBom = "2024.09.00"
-# 将ktor版本调整为与Supabase兼容的版本
 ktorClientAndroid = "3.2.2"
 installreferrer = "2.2"
-# 使用较新且稳定的Supabase BOM版本
 bom = "3.0.0"
 materialIconsExtended = "1.7.8"
 navigationCompose = "2.8.7"
@@ -36,7 +31,6 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRunt
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "bom" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-compose-m3 = { module = "com.patrykandpatrick.vico:compose-m3", version.ref = "composeM3Version" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
