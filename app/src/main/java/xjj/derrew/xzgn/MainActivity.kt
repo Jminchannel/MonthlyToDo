@@ -24,6 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import androidx.compose.animation.core.*
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
@@ -109,7 +111,7 @@ fun SwipeableMainScreen(
     navController: NavHostController,
     viewModel: TaskViewModel
 ) {
-    val pages = listOf("calendar", "tasks", "statistics", "achievements", "settings")
+    val pages = listOf("calendar", "tasks", "statistics", "settings")
     val pagerState = androidx.compose.foundation.pager.rememberPagerState(
         initialPage = 0,
         pageCount = { pages.size }
@@ -154,21 +156,53 @@ fun SwipeableMainScreen(
             }
         )
     } else {
+        // 底部导航栏动画状态
+        var isBottomBarVisible by remember { mutableStateOf(false) }
+        
+        // 启动底部导航栏动画
+        LaunchedEffect(Unit) {
+            isBottomBarVisible = true
+        }
+        
+        // 底部导航栏动画
+        val bottomBarOffsetY by animateFloatAsState(
+            targetValue = if (isBottomBarVisible) 0f else 100f,
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessLow
+            ),
+            label = "bottomBarAnimation"
+        )
+        
+        val bottomBarAlpha by animateFloatAsState(
+            targetValue = if (isBottomBarVisible) 1f else 0f,
+            animationSpec = tween(durationMillis = 400, easing = FastOutSlowInEasing),
+            label = "bottomBarAlpha"
+        )
+        
         // 显示主界面
         Scaffold(
         bottomBar = {
-            BottomNavigationBar(
-                navController = navController,
-                currentRoute = pages[pagerState.currentPage],  // 传递当前路由
-                onNavigate = { route ->
-                    val index = pages.indexOf(route)
-                    if (index != -1) {
-                        scope.launch {
-                            pagerState.animateScrollToPage(index)
+            Box(
+                modifier = Modifier
+                    .graphicsLayer {
+                        translationY = bottomBarOffsetY
+                        alpha = bottomBarAlpha
+                    }
+            ) {
+                BottomNavigationBar(
+                    navController = navController,
+                    currentRoute = pages[pagerState.currentPage],  // 传递当前路由
+                    onNavigate = { route ->
+                        val index = pages.indexOf(route)
+                        if (index != -1) {
+                            scope.launch {
+                                pagerState.animateScrollToPage(index)
+                            }
                         }
                     }
-                }
-            )
+                )
+            }
         }
     ) { innerPadding ->
         // HorizontalPager - 包含所有页面
@@ -201,19 +235,52 @@ fun CalendarWithTaskList(viewModel: TaskViewModel) {
     val calendarSettingsManager = remember { xjj.derrew.xzgn.manager.CalendarSettingsManager.getInstance(context) }
     val calendarSize by calendarSettingsManager.getCalendarSize().collectAsState(initial = xjj.derrew.xzgn.manager.CalendarSettingsManager.SIZE_MEDIUM)
     
+    // 日历头部动画状态
+    var isHeaderVisible by remember { mutableStateOf(false) }
+    
+    // 启动日历头部动画
+    LaunchedEffect(Unit) {
+        isHeaderVisible = true
+    }
+    
+    // 日历头部动画
+    val headerOffsetY by animateFloatAsState(
+        targetValue = if (isHeaderVisible) 0f else -150f,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessLow
+        ),
+        label = "headerAnimation"
+    )
+    
+    val headerAlpha by animateFloatAsState(
+        targetValue = if (isHeaderVisible) 1f else 0f,
+        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing),
+        label = "headerAlpha"
+    )
+    
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // 日历头部
+        // 日历头部（带动画）
         item {
-            CalendarHeader(
-                viewModel = viewModel,
-                calendarSize = calendarSize,
-                modifier = Modifier.fillMaxWidth()
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .graphicsLayer {
+                        translationY = headerOffsetY
+                        alpha = headerAlpha
+                    }
+            ) {
+                CalendarHeader(
+                    viewModel = viewModel,
+                    calendarSize = calendarSize,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
         
         // 当月任务列表
